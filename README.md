@@ -2,7 +2,7 @@
 
 QuickText is a Flutter package that simplifies text formatting with markdown-like syntax. It allow you to easily apply styles like bold, italic, underline, strikethrough, and color directly within a string, without the need to manually construct complex `TextSpan` trees. Similiarusage like `Text` widget.
 
-<img height="300" src="https://raw.githubusercontent.com/Anees7757/quick_text/master/assets/images/2.png" alt=""/>
+<img height="300" src="https://raw.githubusercontent.com/Anees7757/quick_text/master/assets/images/1.png" alt=""/>
 
 ## Key Features
 
