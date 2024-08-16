@@ -1,8 +1,8 @@
-# TextPlus
+# QuickText
 
-TextPlus is a Flutter package that simplifies text formatting with markdown-like syntax. It allows developers to easily apply styles like bold, italic, underline, strikethrough, and color directly within a string, without the need to manually construct complex `TextSpan` trees.
+QuickText is a Flutter package that simplifies text formatting with markdown-like syntax. It allow you to easily apply styles like bold, italic, underline, strikethrough, and color directly within a string, without the need to manually construct complex `TextSpan` trees. Similiarusage like `Text` widget.
 
-<img height="300" src="https://raw.githubusercontent.com/Anees7757/text_plus/master/assets/images/2.png" alt=""/>
+<img height="300" src="https://raw.githubusercontent.com/Anees7757/quick_text/master/assets/images/2.png" alt=""/>
 
 ## Key Features
 
@@ -11,35 +11,35 @@ TextPlus is a Flutter package that simplifies text formatting with markdown-like
 - **Customizable Styles**: Includes options for text alignment, overflow, max lines, and more, providing the same flexibility as traditional Flutter text widgets.
 - **Built-in Color Support**: Apply named colors directly within your text string.
 
-## Why Use TextPlus?
+## Why Use QuickText?
 
 - **Time-Saving**: Quickly format text without the hassle of constructing text spans.
 - **User-Friendly**: Ideal for developers who want rich text features without the complexity.
-- **Rich Functionality**: Despite its simplicity, TextPlus supports a wide range of text styling options.
+- **Rich Functionality**: Despite its simplicity, QuickText supports a wide range of text styling options.
 
 ## Sample Code
 
-Here's how you can use TextPlus in your Flutter app:
+Here's how you can use QuickText in your Flutter app:
 
 ```dart
 
-TextPlus(
+QuickText(
   'This is **bold** text.',
 ),
 
-TextPlus(
+QuickText(
   'This is *italic* text.',
 ),
 
-TextPlus(
+QuickText(
   'This is _underline_ text.',
 ),
 
-TextPlus(
+QuickText(
   'This is ~strikethrough~ text.',
 ),
 
-TextPlus(
+QuickText(
   'This is [colored](red) text.',
 ),
 ```
@@ -49,7 +49,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  text_plus: ^1.0.0
+  quick_text: ^1.0.0
 ```
 Then run:
   
@@ -60,11 +60,11 @@ flutter pub get
 Finally, import the package in your Dart code:
 
 ```dart
-import 'package:text_plus/text_plus.dart';
+import 'package:quick_text/quick_text.dart';
 ```
 
 ## Limitations
-* No Hex Color Support: Currently, TextPlus only supports named colors and does not support hex color codes.
+* No Hex Color Support: Currently, QuickText only supports named colors and does not support hex color codes.
 
 
 ## Contributing

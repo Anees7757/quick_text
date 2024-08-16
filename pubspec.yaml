@@ -1,7 +1,7 @@
-name: text_plus
-description: "description: A Flutter package for simplified text formatting with markdown-like syntax."
+name: quick_text
+description: "A Flutter package for simplified text formatting with markdown-like syntax."
 version: 1.0.0
-homepage: https://github.com/Anees7757/text_plus
+homepage: https://github.com/Anees7757/quick_text
 
 environment:
   sdk: ^3.5.0

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:text_plus/text_plus.dart';
+import 'package:quick_text/quick_text.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Text Plus Example'),
+          title: const Text('QuickText Example'),
         ),
         body: const Center(
-          child: TextPlus(
+          child: QuickText(
             'This is **bold**, *italic*, _underline_, ~strikethrough~ and [colored](red) text.',
           ),
         ),

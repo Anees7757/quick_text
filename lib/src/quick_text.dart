@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui show TextHeightBehavior;
+import '../src/utils/parser.dart';
 
-import 'package:text_plus/src/utils/parser.dart';
-
-class TextPlus extends StatelessWidget {
+class QuickText extends StatelessWidget {
   /// The text to display.
   final String? data;
 
@@ -106,7 +105,7 @@ class TextPlus extends StatelessWidget {
   /// (semi-transparent grey).
   final Color? selectionColor;
 
-  const TextPlus(
+  const QuickText(
     this.data, {
     super.key,
     this.style,
