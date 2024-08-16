@@ -24,19 +24,19 @@ Here's how you can use TextPlus in your Flutter app:
 ```dart
 
 TextPlus(
-  'This is **bold**',
+  'This is **bold** text.',
 ),
 
 TextPlus(
-  'This is *italic*',
+  'This is *italic* text.',
 ),
 
 TextPlus(
-  'This is _underline_',
+  'This is _underline_ text.',
 ),
 
 TextPlus(
-  'This is ~strikethrough~',
+  'This is ~strikethrough~ text.',
 ),
 
 TextPlus(
