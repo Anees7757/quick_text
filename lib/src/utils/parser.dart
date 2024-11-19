@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../constants/constants.dart';
 
 class Parser {
@@ -13,7 +12,7 @@ class Parser {
     final textSpans = <TextSpan>[];
 
     final pattern = RegExp(
-        r'(\*\*(.*?)\*\*)|(\*(.*?)\*)|(_(.*?)_)|(~(.*?)~)|(\[(.*?)\]\((.*?)\))');
+        r'(\*\*(.*?)\*\*)|(\*(.*?)\*)|(_(.*?)_)|(~(.*?)~)|(\[(.*?)\]\(((#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8}))|[a-zA-Z]+)\))');
     final matches = pattern.allMatches(text);
 
     int lastMatchEnd = 0;
@@ -46,9 +45,18 @@ class Parser {
           style: baseStyle.copyWith(decoration: TextDecoration.lineThrough),
         ));
       } else if (match.group(9) != null) {
-        final color = _parseColor(match.group(11));
+        final displayText = match.group(10);
+        final colorValue = match.group(11);
+
+        Color color;
+        if (colorValue!.startsWith('#')) {
+          color = _parseHexColor(colorValue);
+        } else {
+          color = _parseStringColor(colorValue);
+        }
+
         textSpans.add(TextSpan(
-          text: match.group(10),
+          text: displayText,
           style: baseStyle.copyWith(color: color),
         ));
       }
@@ -69,7 +77,15 @@ class Parser {
     );
   }
 
-  Color _parseColor(String? colorString) {
+  Color _parseStringColor(String colorString) {
     return colorMap[colorString] ?? Colors.black;
+  }
+
+  Color _parseHexColor(String colorString) {
+    try {
+      return Color(int.parse('0xff${colorString.substring(1)}'));
+    } catch (e) {
+      return Colors.black;
+    }
   }
 }
