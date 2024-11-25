@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants/constants.dart';
 
 class Parser {
@@ -24,7 +26,7 @@ class Parser {
   List<TextSpan> _parseRecursively(String text, TextStyle currentStyle) {
     final textSpans = <TextSpan>[];
     final pattern = RegExp(
-        r'(\*\*(.*?)\*\*)|(\*(.*?)\*)|(_(.*?)_)|(~(.*?)~)|(\[(.*?)\]\(((#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8}))|[a-zA-Z]+)\))');
+        r'(\*\*(.*?)\*\*)|(\*(.*?)\*)|(_(.*?)_)|(~(.*?)~)|(\[(.*?)\]\(((#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8}))|[a-zA-Z:/.\-_]+)\))');
     final matches = pattern.allMatches(text);
 
     int lastMatchEnd = 0;
@@ -66,10 +68,26 @@ class Parser {
         Color color;
         if (colorValue!.startsWith('#')) {
           color = _parseHexColor(colorValue);
+        } else if (_isValidUrl(colorValue)) {
+          // Handle as a clickable link
+          textSpans.add(TextSpan(
+            text: displayText,
+            style: currentStyle.copyWith(
+              color: Colors.blue,
+              decoration: TextDecoration.underline,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                _launchUrl(colorValue);
+              },
+          ));
+          lastMatchEnd = match.end;
+          continue;
         } else {
           color = _parseStringColor(colorValue);
         }
 
+        // Handle as colored text
         textSpans.add(TextSpan(
           children: _parseRecursively(
               displayText!, currentStyle.copyWith(color: color)),
@@ -98,6 +116,18 @@ class Parser {
       return Color(int.parse('0xff${colorString.substring(1)}'));
     } catch (e) {
       return Colors.black;
+    }
+  }
+
+  bool _isValidUrl(String url) {
+    final uri = Uri.tryParse(url);
+    return uri != null && (uri.hasScheme || url.contains(RegExp(r'https?://')));
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.tryParse(url);
+    if (await canLaunchUrl(uri!)) {
+      await launchUrl(uri);
     }
   }
 }

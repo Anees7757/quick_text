@@ -23,17 +23,25 @@ Here's how you can use QuickText in your Flutter app:
 
 ```dart
 
+// Bold:
+
 QuickText(
   'This is **bold** text.',
 ),
+
+// Italic:
 
 QuickText(
   'This is *italic* text.',
 ),
 
+// Underline:
+
 QuickText(
   'This is _underline_ text.',
 ),
+
+// Strikethrough:
 
 QuickText(
   'This is ~strikethrough~ text.',
@@ -51,9 +59,11 @@ QuickText(
   'This is [colored](#FF0000) text.',
 ),
 
+// link:
+
 QuickText(
-  'Combine styles: **bold**, *italic*, _underline_, and [colorful](#FF5733)!',
-);
+  'This is [link](https://example.com).',
+),
 
 ```
 
