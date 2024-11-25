@@ -129,8 +129,11 @@ class Parser {
 
   Future<void> _launchUrl(String url) async {
     final uri = Uri.tryParse(url);
-    // if (await canLaunchUrl(uri!)) {
-    await launchUrl(uri!);
-    // }
+    try {
+      await launchUrl(uri!);
+    } catch (e) {
+      print('[Quick Text] Error launching URL: $url');
+      print(e);
+    }
   }
 }
