@@ -1,6 +1,6 @@
 name: quick_text
 description: "A Flutter package for simplified text formatting with markdown-like syntax."
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/Anees7757/quick_text
 
 environment:

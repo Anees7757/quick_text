@@ -1,3 +1,7 @@
+## 1.0.3
+* Links support added
+* bugs resolved
+
 ## 1.0.2
 * Hex colors support added
 
