@@ -9,84 +9,77 @@ class Parser {
   TextSpan parseText(String text) {
     final baseStyle = (style ?? const TextStyle())
         .copyWith(color: style?.color ?? Colors.black);
+    final textSpans = <TextSpan>[];
 
+    final matches = _parseRecursively(text, baseStyle);
+
+    textSpans.addAll(matches);
+
+    return TextSpan(
+      style: baseStyle,
+      children: textSpans,
+    );
+  }
+
+  List<TextSpan> _parseRecursively(String text, TextStyle currentStyle) {
+    final textSpans = <TextSpan>[];
     final pattern = RegExp(
-        r'(\*\*(.*?)\*\*)|(\*(.*?)\*)|(_(.*?)_)|(~(.*?)~)|(\[(.*?)\]\(((#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8}))|[a-zA-Z]+|https?:\/\/[^\s]+)\))');
+        r'(\*\*(.*?)\*\*)|(\*(.*?)\*)|(_(.*?)_)|(~(.*?)~)|(\[(.*?)\]\(((#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8}))|[a-zA-Z]+)\))');
     final matches = pattern.allMatches(text);
 
-    if (matches.isEmpty) {
-      // No more matches; return plain text
-      return TextSpan(text: text, style: baseStyle);
-    }
-
-    final textSpans = <TextSpan>[];
     int lastMatchEnd = 0;
-
     for (final match in matches) {
       if (match.start > lastMatchEnd) {
-        textSpans.add(parseText(text.substring(lastMatchEnd, match.start)));
+        textSpans.add(TextSpan(
+          text: text.substring(lastMatchEnd, match.start),
+          style: currentStyle,
+        ));
       }
 
       if (match.group(1) != null) {
         // Bold
-        textSpans.add(TextSpan(
-          text: match.group(2),
-          style: baseStyle.copyWith(fontWeight: FontWeight.bold),
-          children: [parseText(match.group(2)!)],
-        ));
+        textSpans.add(
+            TextSpan(children: _parseRecursively(match.group(2)!, currentStyle.copyWith(fontWeight: FontWeight.bold))));
       } else if (match.group(3) != null) {
         // Italic
-        textSpans.add(TextSpan(
-          text: match.group(4),
-          style: baseStyle.copyWith(fontStyle: FontStyle.italic),
-          children: [parseText(match.group(4)!)],
-        ));
+        textSpans.add(
+            TextSpan(children: _parseRecursively(match.group(4)!, currentStyle.copyWith(fontStyle: FontStyle.italic))));
       } else if (match.group(5) != null) {
         // Underline
         textSpans.add(TextSpan(
-          text: match.group(6),
-          style: baseStyle.copyWith(decoration: TextDecoration.underline),
-          children: [parseText(match.group(6)!)],
-        ));
+            children: _parseRecursively(match.group(6)!, currentStyle.copyWith(decoration: TextDecoration.underline))));
       } else if (match.group(7) != null) {
         // Strikethrough
         textSpans.add(TextSpan(
-          text: match.group(8),
-          style: baseStyle.copyWith(decoration: TextDecoration.lineThrough),
-          children: [parseText(match.group(8)!)],
-        ));
+            children: _parseRecursively(match.group(8)!, currentStyle.copyWith(decoration: TextDecoration.lineThrough))));
       } else if (match.group(9) != null) {
-        // Color
+        // Link or color text
         final displayText = match.group(10);
-        final linkValue = match.group(11);
-        if (linkValue!.startsWith('#')) {
-          final color = _parseHexColor(linkValue);
-          textSpans.add(TextSpan(
-            text: displayText,
-            style: baseStyle.copyWith(color: color),
-            children: [parseText(displayText!)],
-          ));
+        final colorValue = match.group(11);
+
+        Color color;
+        if (colorValue!.startsWith('#')) {
+          color = _parseHexColor(colorValue);
         } else {
-          final color = _parseStringColor(linkValue);
-          textSpans.add(TextSpan(
-            text: displayText,
-            style: baseStyle.copyWith(color: color),
-            children: [parseText(displayText!)],
-          ));
+          color = _parseStringColor(colorValue);
         }
+
+        textSpans.add(TextSpan(
+          children: _parseRecursively(displayText!, currentStyle.copyWith(color: color)),
+        ));
       }
 
       lastMatchEnd = match.end;
     }
 
     if (lastMatchEnd < text.length) {
-      textSpans.add(parseText(text.substring(lastMatchEnd)));
+      textSpans.add(TextSpan(
+        text: text.substring(lastMatchEnd),
+        style: currentStyle,
+      ));
     }
 
-    return TextSpan(
-      style: baseStyle,
-      children: textSpans,
-    );
+    return textSpans;
   }
 
   Color _parseStringColor(String colorString) {
