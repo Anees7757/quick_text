@@ -38,20 +38,26 @@ class Parser {
 
       if (match.group(1) != null) {
         // Bold
-        textSpans.add(
-            TextSpan(children: _parseRecursively(match.group(2)!, currentStyle.copyWith(fontWeight: FontWeight.bold))));
+        textSpans.add(TextSpan(
+            children: _parseRecursively(match.group(2)!,
+                currentStyle.copyWith(fontWeight: FontWeight.bold))));
       } else if (match.group(3) != null) {
         // Italic
-        textSpans.add(
-            TextSpan(children: _parseRecursively(match.group(4)!, currentStyle.copyWith(fontStyle: FontStyle.italic))));
+        textSpans.add(TextSpan(
+            children: _parseRecursively(match.group(4)!,
+                currentStyle.copyWith(fontStyle: FontStyle.italic))));
       } else if (match.group(5) != null) {
         // Underline
         textSpans.add(TextSpan(
-            children: _parseRecursively(match.group(6)!, currentStyle.copyWith(decoration: TextDecoration.underline))));
+            children: _parseRecursively(match.group(6)!,
+                currentStyle.copyWith(decoration: TextDecoration.underline))));
       } else if (match.group(7) != null) {
         // Strikethrough
         textSpans.add(TextSpan(
-            children: _parseRecursively(match.group(8)!, currentStyle.copyWith(decoration: TextDecoration.lineThrough))));
+            children: _parseRecursively(
+                match.group(8)!,
+                currentStyle.copyWith(
+                    decoration: TextDecoration.lineThrough))));
       } else if (match.group(9) != null) {
         // Link or color text
         final displayText = match.group(10);
@@ -65,7 +71,8 @@ class Parser {
         }
 
         textSpans.add(TextSpan(
-          children: _parseRecursively(displayText!, currentStyle.copyWith(color: color)),
+          children: _parseRecursively(
+              displayText!, currentStyle.copyWith(color: color)),
         ));
       }
 
