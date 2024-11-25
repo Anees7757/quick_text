@@ -1,12 +1,12 @@
 # QuickText
 
-QuickText is a Flutter package that simplifies text formatting with markdown-like syntax. It allow you to easily apply styles like bold, italic, underline, strikethrough, and color directly within a string, without the need to manually construct complex `TextSpan` trees. Similiar usage like `Text` widget.
+QuickText is a Flutter package that simplifies text formatting with markdown-like syntax. It allow you to easily apply styles like bold, italic, underline, strikethrough color and links directly within a string, without the need to manually construct complex `TextSpan` trees. Similiar usage like `Text` widget.
 
 <img height="300" src="https://raw.githubusercontent.com/Anees7757/quick_text/master/assets/images/1.png" alt=""/>
 
 ## Key Features
 
-- **Simplified Syntax**: Style your text with symbols like `**bold**`, `*italic*`, `_underline_`, `~strikethrough~`, `[colored](red)` and `[colored](#FF0000)`.
+- **Simplified Syntax**: Style your text with symbols like `**bold**`, `*italic*`, `_underline_`, `~strikethrough~`, `[colored](red)`, `[colored](#FF0000)` and `[link](https://example.com)`.
 - **Enhanced Readability**: Clean and easy-to-read code, reducing the verbosity of `RichText` and `TextSpan`.
 - **Customizable Styles**: Includes options for text alignment, overflow, max lines, and more, providing the same flexibility as traditional Flutter text widgets.
 - **Built-in Color Support**: Apply named or hex colors directly within your text string.
@@ -23,43 +23,43 @@ Here's how you can use QuickText in your Flutter app:
 
 ```dart
 
-// Bold:
+// Bold
 
 QuickText(
   'This is **bold** text.',
 ),
 
-// Italic:
+// Italic
 
 QuickText(
   'This is *italic* text.',
 ),
 
-// Underline:
+// Underline
 
 QuickText(
   'This is _underline_ text.',
 ),
 
-// Strikethrough:
+// Strikethrough
 
 QuickText(
   'This is ~strikethrough~ text.',
 ),
 
-// Color using named colors:
+// Using named colors
 
 QuickText(
   'This is [colored](red) text.',
 ),
 
-// Or using Hex Color:
+// Using hex colors
 
 QuickText(
   'This is [colored](#FF0000) text.',
 ),
 
-// link:
+// links
 
 QuickText(
   'This is [link](https://example.com).',
@@ -86,19 +86,3 @@ Finally, import the package in your Dart code:
 ```dart
 import 'package:quick_text/quick_text.dart';
 ```
-
-## Contributing
-
-Contributions are welcome! If you encounter any issues or have suggestions for new features, please open an issue on GitHub.
-
-### Fork the repository.
-1. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-2. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-3. Push to the branch (`git push origin feature/AmazingFeature`).
-4. Open a pull request.
-
-## Issues
-If you run into any issues, please file a bug report on our GitHub Issues page. Include detailed steps to reproduce the problem and any relevant code snippets.
-
-## License
-This package is licensed under the **MIT License**. See the LICENSE file for more details.
