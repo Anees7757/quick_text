@@ -121,13 +121,16 @@ class Parser {
 
   bool _isValidUrl(String url) {
     final uri = Uri.tryParse(url);
-    return uri != null && (uri.hasScheme || url.contains(RegExp(r'https?://')));
+    return uri != null &&
+        (uri.hasScheme ||
+            url.contains(RegExp(r'https?://')) ||
+            url.contains(RegExp(r'http?://')));
   }
 
   Future<void> _launchUrl(String url) async {
     final uri = Uri.tryParse(url);
-    if (await canLaunchUrl(uri!)) {
-      await launchUrl(uri);
-    }
+    // if (await canLaunchUrl(uri!)) {
+    await launchUrl(uri!);
+    // }
   }
 }
