@@ -106,7 +106,7 @@ class QuickText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Parser parser = Parser(style: style);
+    final parser = Parser(style: style ?? DefaultTextStyle.of(context).style);
     return RichText(
       key: super.key,
       text: parser.parseText(data!),

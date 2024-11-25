@@ -6,10 +6,10 @@ QuickText is a Flutter package that simplifies text formatting with markdown-lik
 
 ## Key Features
 
-- **Simplified Syntax**: Style your text with symbols like `**bold**`, `*italic*`, `_underline_`, `~strikethrough~`, `[colored](red)` and `[colored](#000000)`.
+- **Simplified Syntax**: Style your text with symbols like `**bold**`, `*italic*`, `_underline_`, `~strikethrough~`, `[colored](red)` and `[colored](#FF0000)`.
 - **Enhanced Readability**: Clean and easy-to-read code, reducing the verbosity of `RichText` and `TextSpan`.
 - **Customizable Styles**: Includes options for text alignment, overflow, max lines, and more, providing the same flexibility as traditional Flutter text widgets.
-- **Built-in Color Support**: Apply named colors directly within your text string.
+- **Built-in Color Support**: Apply named or hex colors directly within your text string.
 
 ## Why Use QuickText?
 
@@ -39,21 +39,26 @@ QuickText(
   'This is ~strikethrough~ text.',
 ),
 
-Color using named colors:
+// Color using named colors:
 
 QuickText(
   'This is [colored](red) text.',
 ),
 
-or using Hex Color:
+// Or using Hex Color:
 
 QuickText(
   'This is [colored](#FF0000) text.',
 ),
 
+QuickText(
+  'Combine styles: **bold**, *italic*, _underline_, and [colorful](#FF5733)!',
+);
+
 ```
 
-##Installation
+## Installation
+
 Add this to your package's pubspec.yaml file:
 
 ```yaml
